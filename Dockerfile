@@ -9,7 +9,7 @@ COPY . ${APP_DIR}
 # Add app user, fetch dependencies and build binary
 RUN adduser --disabled-password --gecos "" --home "/nonexistent" --shell "/sbin/nologin" --no-create-home --uid "${UID}" "${USER}" && \
     go get -d -v && \
-    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 go build -ldflags="-w -s" -o ${APP_DIR}/app *.go
+    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o ${APP_DIR}/app *.go
 
 # Final image
 FROM scratch
